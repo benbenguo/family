@@ -6,7 +6,10 @@
 angular.module('family', [
     'ngRoute',
     'ngAnimate',
-    'family.life.event'
+    'ngCookies',
+    'family.life.event',
+    'family.shared.services',
+    'family.shared.constants'
 ]).
 
 config(['$provide', '$routeProvider', '$httpProvider', '$animateProvider',
@@ -18,4 +21,16 @@ config(['$provide', '$routeProvider', '$httpProvider', '$animateProvider',
 
     //$routeProvider.otherwise({redirectTo: '/error'});
 
-}])
+}]).
+
+controller('MainController', ['$scope', '$location', 'utilService', 'clientLoginService', 'customizedError', 'customizedErrorFactory', 'httpRequestTracker',
+        function($scope, $location, utilService, clientLoginService, customizedError, customizedErrorFactory, httpRequestTracker) {
+
+    $scope.isAuthorized = clientLoginService.isAuthorized;
+    $scope.getCurrentUserInfo = clientLoginService.getCurrentUserInfo;
+    $scope.hasPendingRequests = httpRequestTracker.hasPendingRequests;
+
+    if (!$scope.isAuthorized()) {
+        location.href = 'login.html';
+    }
+}]);

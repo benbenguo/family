@@ -12,6 +12,7 @@ hibernate {
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
     singleSession = true // configure OSIV singleSession mode
     flush.mode = 'manual' // OSIV session flush mode outside of transactional context
+    naming_strategy = family.utils.CustomNamingStrategy
 }
 
 // environment specific settings
@@ -20,12 +21,12 @@ environments {
         dataSource {
             driverClassName = "com.mysql.jdbc.Driver"
 //			dialect = "org.hibernate.dialect.MySQLInnoDBDialect"
-            dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             logSql = true
 
-            url = "jdbc:mysql://rdsw00qqou84wxw60c91.mysql.rds.aliyuncs.com:3306/r6k6k4604d0s9rw8?autoreconnect=true&useUnicode=true&characterEncoding=UTF-8"
-            username = "r6k6k4604d0s9rw8"
-            password = "Lifei1123"
+            url = "jdbc:mysql://127.0.0.1:3306/family?autoreconnect=true&useUnicode=true&characterEncoding=UTF-8"
+            username = "dev-user"
+            password = "dev-user"
         }
     }
     test {

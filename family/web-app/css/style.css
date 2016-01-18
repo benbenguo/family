@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+@import url(font-open-sans-400-300.css);
+@import url(font-oswald-400-300.css);
 
 
 body {
@@ -922,7 +922,7 @@ and (max-width : 991px) {
     color: #bbb;
 }
 
-.contact .text-danger {
+.text-danger {
     color: #e74c3c;
 }
 
@@ -960,4 +960,12 @@ and (max-width : 991px) {
     background: #FF432E;
     padding: 20px;
     color: #fff;
+}
+
+/***** Customized CSS ****************/
+
+.error-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    line-height: 21px;
 }
