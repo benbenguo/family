@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="section-title text-center">
+        <h3>财政收支</h3>
+        <p>记录每一笔收支，让我更精明</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <form name="form" role="form" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select name="type" ng-model="data.type">
+                                    <option value="expense">支出</option>
+                                    <option value="income">收入</option>
+                                    <option value="advance">预支付</option>
+                                    <option value="predict">预计</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="category" ng-model="data.category" ng-options="c.title for c in categories" required>
+                                    <option value="">-- 类别 --</option>
+                                </select>
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.category.$touched">
+                                    <span ng-if="data.category==null" ng-bind="error.category"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="标题 *" required />
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
+                                    <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
+                                </div>
+                            </div>
+                            <div class="input-number">
+                                <input type="number" name="amount" ng-model="data.amount" class="form-control" placeholder="金额 *"  required />
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                    <span ng-if="form.amount.$error.required" ng-bind="error.amount.required"></span>
+                                </div>
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                    <span ng-if="form.amount.$error.number" ng-bind="error.amount.number"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text"
+                                               class="form-control input-datepicker"
+                                               placeholder="记账日期 ..."
+                                               datepicker-popup="yyyy-MM-dd"
+                                               ng-model="data.date"
+                                               is-open="opened"
+                                               datepicker-options="dateOptions"
+                                               ng-click="open($event)"
+                                               close-text="Close"
+                                               required readonly="readonly"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="memo" ng-model="data.memo" class="form-control" placeholder="备注 *（可选）" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary" ng-click="create()">保存记录</button>
+                                &nbsp;
+                                <a type="submit" class="btn btn-info" href="#create-finance-category">添加类别</a>
+                                &nbsp;
+                                <a type="submit" class="btn btn-info" href="#query-finance">返回上一页</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="section-title text-center">
+        <h3>财政收支分类</h3>
+        <p>我需要知道我的钱都花在那些方面了</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <form name="form" role="form" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select name="type" ng-model="data.type">
+                                    <option value="expense">支出</option>
+                                    <option value="income">收入</option>
+                                    <option value="advance">预支付</option>
+                                    <option value="predict">预计</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="类别标题 *" required />
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
+                                    <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary" ng-click="create()">保存类别</button>
+                                &nbsp;
+                                <a type="submit" class="btn btn-info" href="#create-finance">返回上一页</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-bordered table-striped data-table">
+                        <thead>
+                        <tr style="background-color: #FF432E; color: #fff;">
+                            <th style="width: 400px">标题</th>
+                            <th style="width: 200px">类型</th>
+                            <th style="width: 1px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="category in categories">
+                                <td title="{{category.title}}">
+                                    <span ng-bind="category.title"></span>
+                                </td>
+                                <td title="{{charge.type}}">
+                                    <span ng-bind="(category.type | getFinanceCategoryType)"></span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="delete(category)"> 删 除 </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

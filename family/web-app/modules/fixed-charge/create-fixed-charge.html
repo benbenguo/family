@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="section-title text-center">
+        <h3>每月固定支出</h3>
+        <p>每月固定支出，让我记得不要遗漏</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <form name="form" role="form" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="支出标题 *" required />
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
+                                    <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
+                                </div>
+                            </div>
+                            <div class="input-number">
+                                <input type="number" name="amount" ng-model="data.amount" class="form-control" placeholder="支出金额 *"  required />
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                    <span ng-if="form.amount.$error.required" ng-bind="error.amount.required"></span>
+                                </div>
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                    <span ng-if="form.amount.$error.number" ng-bind="error.amount.number"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea class="form-control" ng-model="data.memo" type="text" placeholder="支出备注 * (可选)"/>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary" ng-click="create()">保存支出</button>
+                                &nbsp;
+                                <a type="submit" class="btn btn-info" href="#query-fixed-charge">返回上一页</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

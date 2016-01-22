@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="section-title text-center">
+        <h3>生活足迹</h3>
+        <p>记录生活的一些重要事件，方便我们查看</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <form name="form" role="form" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mb-datepicker element-id='eventDate'
+                                           arrows="dateConfig.arrows"
+                                           input-class="date-input"
+                                           calendar-header="dateConfig.header"
+                                           date="data.date"
+                                           date-format="YYYY-MM-DD"></mb-datepicker>
+                            <div class="form-group">
+                                <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="足迹标题 *" required>
+                                <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched"><span ng-if="form.title.$error.required" ng-bind="error.title"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea class="form-control" ng-model="data.memo" type="text" placeholder="足迹备注 * (可选)"/>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary" ng-click="create()">保存足迹</button>
+                                &nbsp;
+                                <a type="submit" class="btn btn-info" href="#query-event">返回上一页</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

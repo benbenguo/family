@@ -59,6 +59,12 @@ grails {
     }
 }
 
+// customized configuration
+grails.databinding.dateFormats = ['yyyy-MM-dd', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss.sss'Z'", "yyyy-MM-dd'T'hh:mm:ss'Z'"]
+grails.gorm.failOnError = true
+grails.gorm.default.constraints = {
+    '*'(nullable: true)
+}
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration

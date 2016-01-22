@@ -45,4 +45,11 @@ constant('customizedError', {
     noAdRevenueFound: 'ERROR_NO_AD_REVENUE_FOUND',
     accountIncorrectStatus: 'ERROR_ACCOUNT_INCORRECT_STATUS',
     incorrectVerficationCode: 'ERROR_ACCOUNT_INCORRECT_VERIFICATION_CODE'
+}).
+
+constant('financeCategoryType', {
+	expense: '支出',
+	income: '收入',
+	advance: '预支付',
+	predict: '预计'
 });

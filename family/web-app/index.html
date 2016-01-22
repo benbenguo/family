@@ -9,20 +9,17 @@
 
         <title>DAA - We are famlily</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Font Awesome CSS -->
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-		
-		<!-- Custom CSS -->
-        <link href="css/animate.css" rel="stylesheet">
-
+        <!-- Bootstrap CSS -->
+        <!-- Custom Fonts -->
+        <link href='css/font-googleapis.css' rel='stylesheet' type='text/css'>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type='text/css'>
+        <link href="css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+        <link href="css/animate.css" rel="stylesheet" type='text/css'>
+        <!--<link href="components/angular-ui/angular-ui.min.css"  rel="stylesheet" type='text/css'>-->
+        <link href="components/datepicker/mbdatepicker.css" rel="stylesheet" type='text/css'>
         <!-- Custom CSS -->
         <link href="css/style.css" rel="stylesheet">
 
-        <!-- Custom Fonts -->
-        <link href='css/font-googleapis.css' rel='stylesheet' type='text/css'>
 
     </head>
 
@@ -52,23 +49,23 @@
                     <div class="col-md-3">
                         
                         <div class="menu-item blue">
-                            <a href="#life-event" data-toggle="modal">
+                            <a href="#query-event" data-toggle="modal" data-target="#pop-modal">
                                 <i class="fa fa-magic"></i>
                                 <p>生活足迹</p>
                             </a>
                         </div>
                         
                         <div class="menu-item green">
-                            <a href="#portfolio-modal" data-toggle="modal">
-                                <i class="fa fa-file-photo-o"></i>
-                                <p>Portfolio</p>
+                            <a href="#query-finance" data-toggle="modal" data-target="#pop-modal">
+                                <i class="fa fa-area-chart"></i>
+                                <p>财政收支</p>
                             </a>
                         </div>
                         
                         <div class="menu-item light-red">
-                            <a href="#about-modal" data-toggle="modal">
-                                <i class="fa fa-user"></i>
-                                <p>About Us</p>
+                            <a href="#query-fixed-charge" data-toggle="modal" data-target="#pop-modal">
+                                <i class="fa fa-money"></i>
+                                <p>每月固定支出</p>
                             </a>
                         </div>
                         
@@ -107,18 +104,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="menu-item color responsive">
-                                    <a href="#service-modal" data-toggle="modal">
+                                    <a href="#service-modal" data-toggle="modal" data-target="#pop-modal">
                                         <i class="fa fa-area-chart"></i>
-                                        <p>Services</p>
+                                        <p>To be continued</p>
                                     </a>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
                                 <div class="menu-item light-orange responsive-2">
-                                    <a href="#team-modal" data-toggle="modal">
+                                    <a href="#team-modal" data-toggle="modal" data-target="#pop-modal">
                                         <i class="fa fa-users"></i>
-                                        <p>Team</p>
+                                        <p>To be continued</p>
                                     </a>
                                 </div>
                             </div>
@@ -130,23 +127,23 @@
                     <div class="col-md-3">
                         
                         <div class="menu-item light-red">
-                            <a href="#contact-modal" data-toggle="modal">
+                            <a href="#contact-modal" data-toggle="modal" data-target="#pop-modal">
                                 <i class="fa fa-envelope-o"></i>
-                                <p>Contact</p>
+                                <p>To be continued</p>
                             </a>
                         </div>
                         
                         <div class="menu-item color">
-                            <a href="#testimonial-modal" data-toggle="modal">
+                            <a href="#testimonial-modal" data-toggle="modal" data-target="#pop-modal">
                                 <i class="fa fa-comment-o"></i>
-                                <p>Testimonial</p>
+                                <p>To be continued</p>
                             </a>
                         </div>
                         
                         <div class="menu-item blue">
-                            <a href="#news-modal" data-toggle="modal">
+                            <a href="#news-modal" data-toggle="modal" data-target="#pop-modal">
                                 <i class="fa fa-mortar-board"></i>
-                                <p>Latest News</p>
+                                <p>To be continued</p>
                             </a>
                         </div>
                         
@@ -161,7 +158,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div>Design & Developed by <a href="https://www.facebook.com/Shahriyar.Ahmed.Sohel" target="_blank">Shahriyar Ahmed</a> for <a href="http://graygrids.com">GrayGrids</a></div>
+                        <div style="text-align: center">Do you want to leave? Click here --> <a ng-click="logout()" style="cursor: pointer;">Logout</a></div>
                     </div>
                 </div>
             </div>
@@ -170,243 +167,73 @@
 
 
         <!-- Start Feature Section -->
-        <div class="section-modal modal fade" id="life-event" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="section-modal modal fade" id="pop-modal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
+                <div class="close-modal" data-dismiss="modal" ng-click="closeModal()">
                     <div class="lr">
                         <div class="rl">
                         </div>
                     </div>
                 </div>
                 
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>生活足迹</h3>
-                            <p>记录生活的一些重要事件，方便我们查看</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12" ng-view>
+                <div class="container" ng-view>
 
-                        </div>
-                    </div>
                 </div>
                 
             </div>
         </div>
         <!-- End Feature Section -->
-        
-        
-        
-        <!-- Start Portfolio Section -->
-        <div class="section-modal modal fade" id="portfolio-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Our Portfolio</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        
-                    </div><!-- /.row -->
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Portfolio Section -->
-        
-        
-        <!-- Start About Us Section -->
-        <div class="section-modal modal fade" id="about-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>About Us</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
 
+        <div>
+            <div class="mask-container" ng-show="hasPendingRequests()">
+                <div class="mask-indicator">
+                    <div class="col-lg-12">
+                        <div class="box box-danger" style="padding: 0px;">
+                            <div class="overlay">
+                                <i class="fa fa-refresh fa-spin" style="font-size: 50px;"></i>
+                            </div>
+                        </div>
+                        <!-- /.box -->
                     </div>
+                    <!-- /.col -->
                 </div>
-                
             </div>
         </div>
-        <!-- End About Us Section -->
-        
-        
-        <!-- Start Service Section -->
-        <div class="section-modal modal fade" id="service-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Our Services</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
 
-                    </div><!-- /.row -->
-                </div>
-            </div>
-        </div>
-        <!-- End Service Section -->
-        
-        
-        <!-- Start Team Member Section -->
-        <div class="section-modal modal fade" id="team-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Our Expert Team</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div><!-- /.row -->
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Team Member Section -->
-        
-        
-        <!-- Start Latest News Section -->
-        <div class="section-modal modal fade" id="news-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Exclusive News</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Latest News Section -->
-        
-        
-        
-        <!-- Start Contact Section -->
-        <div class="section-modal modal fade contact" id="contact-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Contact With Us</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Contact Section -->
-        
-        
-         <!-- Start Testimonial Section -->
-        <div class="section-modal modal fade contact" id="testimonial-modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Client's Speech About Us</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div><!--/.row -->
-                    
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Testimonial Section -->
 
         <!-- Template js -->
-        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="components/jquery-2.1.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/jquery.appear.js"></script>
-        <script src="js/contact_me.js"></script>
-        <script src="js/jqBootstrapValidation.js"></script>
-        <script src="js/modernizr.custom.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/angular.min.js"></script>
-        <script src="js/angular-animate.min.js"></script>
-        <script src="js/angular-route.min.js"></script>
-        <script src="js/angular-cookies.min.js"></script>
+        <script src="components/jquery.appear.js"></script>
+        <script src="components/angular.min.js"></script>
+        <script src="components/angular-animate.min.js"></script>
+        <script src="components/angular-route.min.js"></script>
+        <script src="components/angular-cookies.min.js"></script>
+        <script src="components/moment/min/moment.min.js"></script>
+        <script src="components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <!--<script src="components/angular-bootstrap/ui-bootstrap-tpls-1.1.0.min.js"></script>-->
+        <!--<script src="components/angular-ui/angular-ui.min.js"></script>-->
+        <!--<script src="components/angular-ui/angular-locale_zh-cn.js"></script>-->
+        <script src="components/datepicker/mbdatepicker.js"></script>
 
-        <script src="js/app.js"></script>
-        <script src="modules/life-event/life-event.js"></script>
+        <script src="app.js"></script>
+        <script src="script.js"></script>
+
         <script src="shared/constants/constants.js"></script>
+        <script src="shared/config/config.js"></script>
         <script src="shared/services/shared-service.js"></script>
+        <script src="shared/directives/directives.js"></script>
+        <script src="shared/filter/filter.js"></script>
         <script src="shared/services/user-service.js"></script>
+        <script src="shared/services/event-service.js"></script>
+        <script src="shared/services/finance-service.js"></script>
+        <script src="shared/services/finance-category-service.js"></script>
+        <script src="shared/services/fixed-charge-service.js"></script>
 
+        <script src="modules/event/event.js"></script>
+        <script src="modules/finance/finance.js"></script>
+        <script src="modules/finance-category/finance-category.js"></script>
+        <script src="modules/fixed-charge/fixed-charge.js"></script>
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
