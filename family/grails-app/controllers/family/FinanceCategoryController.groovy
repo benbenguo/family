@@ -17,8 +17,9 @@ class FinanceCategoryController extends BaseController {
 
     def create() {
         def data = request.JSON
-        new FinanceCategory(title: data.title, type: data.type, createdBy: userInfo.proxyUser, lastUpdatedBy: userInfo.proxyUser, dateCreated: new Date(), lastUpdated: new Date()).save(flush: true, failOnError: true)
-        render([success: true] as JSON)
+        def category = new FinanceCategory(title: data.title, type: data.type, createdBy: userInfo.proxyUser, lastUpdatedBy: userInfo.proxyUser, dateCreated: new Date(), lastUpdated: new Date())
+        category.save(flush: true, failOnError: true)
+        render([success: true, category: category] as JSON)
     }
 
     def delete() {

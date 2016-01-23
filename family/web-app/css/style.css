@@ -970,10 +970,15 @@ and (max-width : 991px) {
     line-height: 21px;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group input {
     padding: 30px 30px 30px 20px;
 }
+
+.form-group textarea {
+    height: 137px;
+    padding: 20px 30px 0px 20px;
+}
+
 
 .form-group select {
     padding: 20px;

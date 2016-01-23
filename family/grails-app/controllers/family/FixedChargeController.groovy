@@ -22,12 +22,7 @@ class FixedChargeController extends BaseController {
     }
 
     def query() {
-        def criteria = FixedCharge.createCriteria()
-        def list = criteria.list(sort: "dateCreated", order: "desc") {
-            and {
-                eq("createdBy", userInfo.proxyUser)
-            }
-        }.collect {[
+        def list = FixedCharge.list(sort: "dateCreated", order: "desc").collect {[
                 id: it.id,
                 title: it.title,
                 amount: it.amount,

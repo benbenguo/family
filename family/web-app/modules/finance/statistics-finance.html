@@ -37,9 +37,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" ng-click="query()"> 查询 </button>
                             &nbsp;
-                            <a type="button" class="btn btn-info" href="#statistics-finance">统计 </a>
-                            &nbsp;
-                            <a type="button" class="btn btn-info" href="#create-finance"> 记一笔 </a>
+                            <a type="button" class="btn btn-info" href="#query-finance"> 返回 </a>
                         </div>
                     </div>
                 </div>
@@ -62,25 +60,26 @@
                     <table class="table table-bordered table-striped data-table">
                         <thead>
                         <tr style="background-color: #FF432E; color: #fff;">
-                            <th style="width: 400px">标题</th>
+                            <th>类型</th>
                             <th style="width: 200px">金额</th>
-                            <th style="width: 1px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="finance in finances">
-                                <td title="{{finance.title}}" ng-click="detail(finance)">
-                                    <span ng-bind="finance.title"></span>
+                            <tr ng-repeat="s in statistics">
+                                <td title="{{s[0]}}">
+                                    <span ng-bind="s[0]"></span>
                                 </td>
-                                <td title="{{finance.amount}}">
-                                    <span ng-bind="(finance.amount | number:2)"></span>
-                                </td>
-                                <td style="text-align: center;">
-                                    <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="delete(finance)"> 删 除 </button>
+                                <td>
+                                    <span ng-bind="(s[1] | number:2)"></span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 table-responsive">
+                    <div id="chart" style="min-height: 400px; width: 100%"></div>
                 </div>
             </div>
         </div>

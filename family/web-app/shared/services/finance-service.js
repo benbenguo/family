@@ -3,12 +3,19 @@
 // Declare app level module which depends on views, and components
 angular.module('family.shared.services').
 
-factory('financeService', ['$location', '$filter', 'httpRequest', 'myConstants', 'clientLoginService', 'utilService',
-        function($location, $filter, httpRequest, myConstants, clientLoginService, utilService) {
+factory('financeService', ['$location', '$filter', 'httpRequest', 'myConstants',
+        function($location, $filter, httpRequest, myConstants) {
 
 	return {
 		query: function(data, successCallback) {
 			httpRequest.get('finance/query/', {
+				month: $filter('date')(data.month, myConstants.yearMonthFormat),
+				type: data.type
+			}, successCallback);
+		},
+
+		statistics: function(data, successCallback) {
+			httpRequest.get('finance/statistics/', {
 				month: $filter('date')(data.month, myConstants.yearMonthFormat),
 				type: data.type
 			}, successCallback);

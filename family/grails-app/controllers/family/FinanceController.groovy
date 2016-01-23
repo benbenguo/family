@@ -85,4 +85,44 @@ class FinanceController extends BaseController {
 
         render([success: true, data: list, sum: sum] as JSON)
     }
+
+    def statistics() {
+        def month = params.month
+        def type = params.type
+
+        def criteria = Finance.createCriteria()
+        def statistics = criteria.list(max: 5) {
+            createAlias('category','categoryAlias')
+            and {
+                eq("month", month)
+                eq("createdBy", userInfo.proxyUser)
+                eq("categoryAlias.type", type)
+            }
+            projections {
+                groupProperty('categoryAlias.title')
+                sum('amount')
+            }
+        }
+
+        def otherCriteria = Finance.createCriteria()
+        def sum = otherCriteria.list() {
+
+            createAlias('category','categoryAlias')
+
+            and {
+                eq("month", month)
+                eq("createdBy", userInfo.proxyUser)
+                or {
+                    eq("categoryAlias.type", FinanceTypeConstants.EXPENSE)
+                    eq("categoryAlias.type", FinanceTypeConstants.INCOME)
+                }
+            }
+            projections {
+                groupProperty('categoryAlias.type')
+                sum('amount')
+            }
+        }
+
+        render([success: true, data: statistics, sum: sum] as JSON)
+    }
 }

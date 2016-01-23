@@ -12,6 +12,11 @@ config(['$routeProvider', function($routeProvider) {
     when('/create-finance', {
         templateUrl: 'modules/finance/create-finance.html',
         controller: 'CreateFinanceController'
+    }).
+
+    when('/statistics-finance', {
+        templateUrl: 'modules/finance/statistics-finance.html',
+        controller: 'StatisticsFinanceController'
     });
 }]).
 
@@ -120,8 +125,106 @@ controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilS
         query();
 }]).
 
-controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'financeCategoryService', 'financeService',
-    function($scope, $filter, myConstants, financeCategoryService, financeService) {
+controller('StatisticsFinanceController', ['$scope', '$filter', 'myConstants', 'utilService', 'financeService',
+    function($scope, $filter, myConstants, utilService, financeService) {
+
+    $scope.data = {
+        month: $filter('date')(new Date(), myConstants.yearMonthFormat),
+        type: 'expense'
+    };
+
+    $scope.cash = {
+        expense: 0,
+        income: 0
+    };
+
+    $scope.getBalance = function() {
+        return $scope.cash.income - $scope.cash.expense;
+    };
+
+    $scope.opened = false;
+
+    $scope.open = function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        $scope.opened = true;
+    };
+
+    $scope.clear = function () {
+        $scope.ngModel = null;
+    };
+
+    $scope.dateOptions = {
+        'year-format': "'yy'",
+        'show-weeks' : false,
+        'datepicker-mode':"'month'",
+        'min-mode':"month"
+    };
+
+    $scope.query = function() {
+        query();
+    };
+
+    var query = function() {
+        financeService.statistics($scope.data, function(result){
+            $scope.statistics = result.data;
+            drawChart(result.data);
+            var sum = result.sum;
+            if (sum.length > 1) {
+                for (var i = 0; i < sum.length; i++) {
+                    var type = sum[i][0];
+                    if (type == 'expense') {
+                        $scope.cash.expense = sum[i][1];
+                    } else {
+                        $scope.cash.income = sum[i][1];
+                    }
+                }
+            } else if (sum.length == 1) {
+                var type = sum[0][0];
+                if (type == 'expense') {
+                    $scope.cash.expense = sum[0][1];
+                    $scope.cash.income = 0;
+                } else {
+                    $scope.cash.income = sum[0][1];
+                    $scope.cash.expense = 0;
+                }
+            } else {
+                $scope.cash.expense = 0;
+                $scope.cash.income = 0;
+            };
+        });
+    };
+
+    var drawChart = function(data) {
+        var list = [];
+        for (var i = 0; i < data.length; i++) {
+            list.push({value:data[i][1], name:data[i][0]})
+        }
+
+        var chartOption = {
+            series : [
+                {
+                    name: '类别统计',
+                    type: 'pie',
+                    radius: '55%',
+                    roseType: 'angle',
+                    data: list
+                }
+            ]
+        };
+        var chartDom = document.getElementById("chart");
+        var myChart = echarts.init(chartDom);
+
+        if (chartOption && typeof chartOption === "object") {
+            myChart.setOption(chartOption, true);
+        };
+    };
+
+    query();
+}]).
+
+controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'financeCategoryService', 'financeService', 'dateConfig',
+    function($scope, $filter, myConstants, financeCategoryService, financeService, dateConfig) {
 
         /*** Initial Data Start ***/
         var init = function(){
@@ -135,6 +238,8 @@ controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'fina
             };
         };
 
+        $scope.dateConfig = dateConfig;
+
         $scope.categories = [];
 
         $scope.error = {
@@ -146,25 +251,6 @@ controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'fina
             }
         };
         /*** Initial Data End ***/
-
-        /*** Date Component Setting Start ***/
-        $scope.opened = false;
-
-        $scope.open = function(event){
-            event.preventDefault();
-            event.stopPropagation();
-            $scope.opened = true;
-        };
-
-        $scope.clear = function () {
-            $scope.ngModel = null;
-        };
-
-        $scope.dateOptions = {
-            'year-format': "'yy'",
-            'show-weeks' : false
-        };
-        /*** Date Component Setting End ***/
 
         /*** Watch the data.type change and get the related categories Start ***/
         $scope.$watch(function() {

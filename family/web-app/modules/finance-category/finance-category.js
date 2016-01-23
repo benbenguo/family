@@ -43,9 +43,10 @@ controller('CreateFinanceCategoryController', ['$scope', 'myConstants', 'finance
 
     $scope.create = function() {
         if (!$scope.form.$invalid) {
-            financeCategoryService.create($scope.data, function() {
+            financeCategoryService.create($scope.data, function(result) {
                 alert("类别添加成功");
-                $scope.categories.push($scope.data);
+                $scope.categories.push(result.category);
+                $scope.data.title = '';
             });
         }
     };

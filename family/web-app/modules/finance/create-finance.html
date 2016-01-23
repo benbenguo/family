@@ -48,18 +48,25 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text"
-                                               class="form-control input-datepicker"
-                                               placeholder="记账日期 ..."
-                                               datepicker-popup="yyyy-MM-dd"
-                                               ng-model="data.date"
-                                               is-open="opened"
-                                               datepicker-options="dateOptions"
-                                               ng-click="open($event)"
-                                               close-text="Close"
-                                               required readonly="readonly"/>
-                                    </div>
+                                    <mb-datepicker element-id='recordDate'
+                                                   arrows="dateConfig.arrows"
+                                                   input-class="date-input"
+                                                   input-name="recordDate"
+                                                   calendar-header="dateConfig.header"
+                                                   date="data.date"
+                                                   date-format="YYYY-MM-DD"></mb-datepicker>
+                                    <!--<div class="form-group">-->
+                                        <!--<input type="text"-->
+                                               <!--class="form-control input-datepicker"-->
+                                               <!--placeholder="记账日期 ..."-->
+                                               <!--datepicker-popup="yyyy-MM-dd"-->
+                                               <!--ng-model="data.date"-->
+                                               <!--is-open="opened"-->
+                                               <!--datepicker-options="dateOptions"-->
+                                               <!--ng-click="open($event)"-->
+                                               <!--close-text="Close"-->
+                                               <!--required readonly="readonly"/>-->
+                                    <!--</div>-->
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -71,11 +78,11 @@
                         <div class="clearfix"></div>
                         <div class="col-md-12">
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary" ng-click="create()">保存记录</button>
+                                <button type="submit" class="btn btn-primary" ng-click="create()">保存</button>
                                 &nbsp;
                                 <a type="submit" class="btn btn-info" href="#create-finance-category">添加类别</a>
                                 &nbsp;
-                                <a type="submit" class="btn btn-info" href="#query-finance">返回上一页</a>
+                                <a type="submit" class="btn btn-info" href="#query-finance">返回</a>
                             </div>
                         </div>
                     </div>
