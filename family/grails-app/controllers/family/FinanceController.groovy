@@ -11,22 +11,11 @@ class FinanceController extends BaseController {
             delete: "POST"
     ]
 
+    def financeService
+
     def create() {
         def data = request.JSON
-        def date = Date.parse(SharedConstants.SHORT_DATE_FORMAT, data.date)
-
-        def finance = new Finance()
-        finance.with {
-            title = data.title
-            recordDate = date
-            category = FinanceCategory.proxy(data.category.id)
-            amount = data.amount
-            memo = data.memo
-            month = date.format(SharedConstants.YEAR_MONTH_FORMAT)
-            createdBy = userInfo.proxyUser
-            lastUpdatedBy = userInfo.proxyUser
-        }
-        finance.save(flush: true)
+        financeService.create(data, userInfo)
 
         render([success: true] as JSON)
     }
@@ -46,42 +35,8 @@ class FinanceController extends BaseController {
         def month = params.month
         def type = params.type
 
-        def criteria = Finance.createCriteria()
-        def list = criteria.list(sort: "dateCreated", order: "desc") {
-            and {
-                eq("month", month)
-                category {
-                    eq("type", type)
-                }
-                eq("createdBy", userInfo.proxyUser)
-            }
-        }.collect {[
-                id: it.id,
-                title: it.title,
-                amount: it.amount,
-                date: it.recordDate,
-                category: it.category,
-                memo: it.memo
-        ]}
-
-        def otherCriteria = Finance.createCriteria()
-        def sum = otherCriteria.list() {
-
-            createAlias('category','categoryAlias')
-
-            and {
-                eq("month", month)
-                eq("createdBy", userInfo.proxyUser)
-                or {
-                    eq("categoryAlias.type", FinanceTypeConstants.EXPENSE)
-                    eq("categoryAlias.type", FinanceTypeConstants.INCOME)
-                }
-            }
-            projections {
-                groupProperty('categoryAlias.type')
-                sum('amount')
-            }
-        }
+        def list = financeService.query(month, type, userInfo)
+        def sum = financeService.sumByMonth(month, userInfo)
 
         render([success: true, data: list, sum: sum] as JSON)
     }
@@ -90,38 +45,8 @@ class FinanceController extends BaseController {
         def month = params.month
         def type = params.type
 
-        def criteria = Finance.createCriteria()
-        def statistics = criteria.list(max: 5) {
-            createAlias('category','categoryAlias')
-            and {
-                eq("month", month)
-                eq("createdBy", userInfo.proxyUser)
-                eq("categoryAlias.type", type)
-            }
-            projections {
-                groupProperty('categoryAlias.title')
-                sum('amount')
-            }
-        }
-
-        def otherCriteria = Finance.createCriteria()
-        def sum = otherCriteria.list() {
-
-            createAlias('category','categoryAlias')
-
-            and {
-                eq("month", month)
-                eq("createdBy", userInfo.proxyUser)
-                or {
-                    eq("categoryAlias.type", FinanceTypeConstants.EXPENSE)
-                    eq("categoryAlias.type", FinanceTypeConstants.INCOME)
-                }
-            }
-            projections {
-                groupProperty('categoryAlias.type')
-                sum('amount')
-            }
-        }
+        def statistics = financeService.statistics(month, type, userInfo)
+        def sum = financeService.sumByMonth(month, userInfo)
 
         render([success: true, data: statistics, sum: sum] as JSON)
     }

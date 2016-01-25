@@ -30,7 +30,8 @@ controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilS
 
         $scope.cash = {
             expense: 0,
-            income: 0
+            income: 0,
+            advance: 0
         };
 
         $scope.getBalance = function() {
@@ -64,27 +65,20 @@ controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilS
             financeService.query($scope.data, function(result){
                 $scope.finances = result.data;
                 var sum = result.sum;
-                if (sum.length > 1) {
-                    for (var i = 0; i < sum.length; i++) {
-                        var type = sum[i][0];
-                        if (type == 'expense') {
-                            $scope.cash.expense = sum[i][1];
-                        } else {
-                            $scope.cash.income = sum[i][1];
-                        }
-                    }
-                } else if (sum.length == 1) {
-                    var type = sum[0][0];
+
+                $scope.cash.expense = 0;
+                $scope.cash.income = 0;
+                $scope.cash.advance = 0;
+
+                for (var i = 0; i < sum.length; i++) {
+                    var type = sum[i][0];
                     if (type == 'expense') {
-                        $scope.cash.expense = sum[0][1];
-                        $scope.cash.income = 0;
+                        $scope.cash.expense = sum[i][1];
+                    } else if (type == 'income'){
+                        $scope.cash.income = sum[i][1];
                     } else {
-                        $scope.cash.income = sum[0][1];
-                        $scope.cash.expense = 0;
+                        $scope.cash.advance = sum[i][1];
                     }
-                } else {
-                    $scope.cash.expense = 0;
-                    $scope.cash.income = 0;
                 };
             });
         };
@@ -135,7 +129,8 @@ controller('StatisticsFinanceController', ['$scope', '$filter', 'myConstants', '
 
     $scope.cash = {
         expense: 0,
-        income: 0
+        income: 0,
+        advance: 0
     };
 
     $scope.getBalance = function() {
@@ -170,27 +165,20 @@ controller('StatisticsFinanceController', ['$scope', '$filter', 'myConstants', '
             $scope.statistics = result.data;
             drawChart(result.data);
             var sum = result.sum;
-            if (sum.length > 1) {
-                for (var i = 0; i < sum.length; i++) {
-                    var type = sum[i][0];
-                    if (type == 'expense') {
-                        $scope.cash.expense = sum[i][1];
-                    } else {
-                        $scope.cash.income = sum[i][1];
-                    }
-                }
-            } else if (sum.length == 1) {
-                var type = sum[0][0];
+
+            $scope.cash.expense = 0;
+            $scope.cash.income = 0;
+            $scope.cash.advance = 0;
+
+            for (var i = 0; i < sum.length; i++) {
+                var type = sum[i][0];
                 if (type == 'expense') {
-                    $scope.cash.expense = sum[0][1];
-                    $scope.cash.income = 0;
+                    $scope.cash.expense = sum[i][1];
+                } else if (type == 'income'){
+                    $scope.cash.income = sum[i][1];
                 } else {
-                    $scope.cash.income = sum[0][1];
-                    $scope.cash.expense = 0;
+                    $scope.cash.advance = sum[i][1];
                 }
-            } else {
-                $scope.cash.expense = 0;
-                $scope.cash.income = 0;
             };
         });
     };
