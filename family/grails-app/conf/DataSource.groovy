@@ -42,9 +42,9 @@ environments {
             logSql = false
             pooled = true
 
-            url = "jdbc:mysql://rdsw00qqou84wxw60c91.mysql.rds.aliyuncs.com:3306/r6k6k4604d0s9rw8?autoreconnect=true&useUnicode=true&characterEncoding=UTF-8"
-            username = "r6k6k4604d0s9rw8"
-            password = "Lifei1123"
+            url = "jdbc:mysql://127.0.0.1:3306/family?autoreconnect=true&useUnicode=true&characterEncoding=UTF-8"
+            username = "dev-user"
+            password = "dev-user"
 
             properties {
                 // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
