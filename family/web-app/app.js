@@ -8,6 +8,7 @@ angular.module('family', [
     'ngAnimate',
     'ngCookies',
     'ui.bootstrap',
+    'ngMaterial',
     'materialDatePicker',
     'family.shared.config',
     'family.shared.constants',

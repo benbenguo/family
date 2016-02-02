@@ -60,7 +60,7 @@
                                     <span ng-bind="(category.type | getFinanceCategoryType)"></span>
                                 </td>
                                 <td style="text-align: center;">
-                                    <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="delete(category)"> 删 除 </button>
+                                    <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="delete($event, category)"> 删 除 </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -7,6 +7,7 @@ angular.module('login', [
 	'ngRoute',
 	'ngAnimate',
 	'ngCookies',
+	'ngMaterial',
 	'family.shared.services',
 	'family.shared.constants'
 ]).
@@ -31,7 +32,7 @@ controller('LoginController', ['$scope', '$location', 'utilService', 'clientLogi
 				} else {
 					// Something bad happened
 					var errorText = customizedErrorFactory.getErrorText(result.error);
-					alert(errorText);
+					utilService.alert(null, errorText);
 				}
 			});
 		};

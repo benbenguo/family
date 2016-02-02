@@ -13,8 +13,8 @@ config(['$routeProvider', function($routeProvider) {
     });
 }]).
 
-controller('CreateFinanceCategoryController', ['$scope', 'myConstants', 'financeCategoryService',
-    function($scope, myConstants, financeCategoryService) {
+controller('CreateFinanceCategoryController', ['$scope', 'myConstants', 'financeCategoryService', 'utilService',
+    function($scope, myConstants, financeCategoryService, utilService) {
 
     $scope.error = {
         title: '亲，请输入标题 ...'
@@ -44,26 +44,24 @@ controller('CreateFinanceCategoryController', ['$scope', 'myConstants', 'finance
     $scope.create = function() {
         if (!$scope.form.$invalid) {
             financeCategoryService.create($scope.data, function(result) {
-                alert("类别添加成功");
+                utilService.alert(null, "类别添加成功");
                 $scope.categories.push(result.category);
                 $scope.data.title = '';
             });
         }
     };
 
-    $scope.delete = function(category) {
-        var result = confirm("你确定要删除该类型吗?");
-
-        if (true == result) {
+    $scope.delete = function(event, category) {
+        utilService.confirm(event, "你确定要删除该类型吗?", function(){
             financeCategoryService.delete(category, function(result) {
                 if (result.inUse == true) {
-                    alert("该类型已被使用，无法删除");
+                    utilService.alert(null, "该类型已被使用，无法删除");
                 } else {
                     var index = $scope.categories.indexOf(category);
                     $scope.categories.splice(index, 1);
-                    alert("删除成功");
+                    utilService.alert(null, "删除成功");
                 }
             });
-        }
+        });
     }
 }]);

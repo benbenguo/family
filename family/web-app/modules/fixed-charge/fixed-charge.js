@@ -29,17 +29,15 @@ controller('QueryFixedChargeController', ['$scope', '$filter', 'myConstants', 'u
             $scope.sum = result.sum;
         });
 
-        $scope.delete = function(charge) {
-            var result = confirm("你确定要删除这笔支出吗?");
-
-            if (true == result) {
+        $scope.delete = function(event, charge) {
+            utilService.confirm(event, "你确定要删除这笔支出吗?", function(){
                 fixedChargeService.delete(charge, function(rst){
                     $scope.sum -= charge.amount;
                     var index = $scope.charges.indexOf(charge);
                     $scope.charges.splice(index, 1);
-                    alert("删除成功");
+                    utilService.alert(null, "删除成功");
                 });
-            };
+            });
         };
 
         $scope.detail = function(charge) {
@@ -51,12 +49,12 @@ controller('QueryFixedChargeController', ['$scope', '$filter', 'myConstants', 'u
                 memo = charge.memo;
             }
             var message = "支出详细信息:\n\n标题: " + title + "\n\n金额: " + amount + "\n\n备注: " + memo;
-            alert(message);
+            utilService.alert(null, message);
         };
     }]).
 
-controller('CreateFixedChargeController', ['$scope', '$filter', 'myConstants', 'dateConfig', 'fixedChargeService',
-    function($scope, $filter, myConstants, dateConfig, fixedChargeService) {
+controller('CreateFixedChargeController', ['$scope', '$filter', 'myConstants', 'dateConfig', 'fixedChargeService', 'utilService',
+    function($scope, $filter, myConstants, dateConfig, fixedChargeService, utilService) {
 
     $scope.error = {
         title: '亲，请输入标题 ...',
@@ -77,7 +75,7 @@ controller('CreateFixedChargeController', ['$scope', '$filter', 'myConstants', '
     $scope.create = function() {
         if (!$scope.form.$invalid) {
             fixedChargeService.create($scope.data, function(result){
-                alert("成功的添加了一笔每月固定支出");
+                utilService.alert(null, "成功的添加了一笔每月固定支出");
                 init();
             });
         };

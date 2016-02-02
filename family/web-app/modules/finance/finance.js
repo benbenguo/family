@@ -20,8 +20,8 @@ config(['$routeProvider', function($routeProvider) {
     });
 }]).
 
-controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilService', 'financeService',
-    function($scope, $filter, myConstants, utilService, financeService) {
+controller('QueryFinanceController', ['$scope', '$filter', '$mdDialog', 'myConstants', 'utilService', 'financeService',
+    function($scope, $filter, $mdDialog, myConstants, utilService, financeService) {
 
         $scope.data = {
             month: $filter('date')(new Date(), myConstants.yearMonthFormat),
@@ -33,6 +33,8 @@ controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilS
             income: 0,
             advance: 0
         };
+
+        $scope.types = utilService.financeTypes();
 
         $scope.getBalance = function() {
             return $scope.cash.income - $scope.cash.expense;
@@ -83,22 +85,23 @@ controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilS
             });
         };
 
-        $scope.delete = function(finance) {
-            var result = confirm("你确定要删除这笔支出吗?");
-
-            if (true == result) {
+        $scope.delete = function(finance, event) {
+            utilService.confirm(event, "你确定要删除这笔账单吗?", function(){
                 financeService.delete(finance, function() {
                     var index = $scope.finances.indexOf(finance);
                     $scope.finances.splice(index, 1);
 
                     if (finance.category.type == 'expense') {
                         $scope.cash.expense -= finance.amount;
-                    } else {
+                    } else if (finance.category.type == 'income') {
                         $scope.cash.income -= finance.amount;
+                    } else {
+                        $scope.cash.advance -= finance.amount;
                     }
-                    alert("删除成功");
+
+                    utilService.alert(null, "删除成功");
                 });
-            };
+            });
         };
 
         $scope.detail = function(finance) {
@@ -113,7 +116,8 @@ controller('QueryFinanceController', ['$scope', '$filter', 'myConstants', 'utilS
                 memo = finance.memo;
             }
             var message = "详细信息:\n\n标题: " + title + "\n\n金额: " + amount + "\n\n类型: " + type + "\n\n类别: " + category + "\n\n日期: " + date + "\n\n备注: " + memo;
-            alert(message);
+
+            utilService.alert(null, message);
         };
 
         query();
@@ -211,8 +215,8 @@ controller('StatisticsFinanceController', ['$scope', '$filter', 'myConstants', '
     query();
 }]).
 
-controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'financeCategoryService', 'financeService', 'dateConfig',
-    function($scope, $filter, myConstants, financeCategoryService, financeService, dateConfig) {
+controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'utilService', 'financeCategoryService', 'financeService', 'dateConfig',
+    function($scope, $filter, myConstants, utilService, financeCategoryService, financeService, dateConfig) {
 
         /*** Initial Data Start ***/
         var init = function(){
@@ -262,7 +266,7 @@ controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'fina
         $scope.create = function() {
             if (!$scope.form.$invalid) {
                 financeService.create($scope.data, function() {
-                    alert("成功的添加了一笔");
+                    utilService.alert(null, "成功的添加了一笔");
                     init();
                 });
             }

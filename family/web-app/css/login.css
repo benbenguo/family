@@ -84,6 +84,13 @@ img { max-width: 100%; }
     padding: 100px 0 170px 0;
 }
 
+.top-content {
+	background: url(../images/background.jpg) no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
 .top-content .text {
 	color: #fff;
 }

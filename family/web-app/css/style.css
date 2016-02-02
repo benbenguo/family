@@ -2,7 +2,15 @@
 @import url(font-oswald-400-300.css);
 
 
-body {
+/*body {*/
+    /*background: url(../images/background.jpg) no-repeat;*/
+    /*background-attachment: fixed;*/
+    /*background-size: cover;*/
+    /*background-position: 50% 50%;*/
+    /*font-family: 'Open Sans', sans-serif;*/
+/*}*/
+
+.cover {
     background: url(../images/background.jpg) no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -1111,4 +1119,42 @@ span.text-vertical-center {
     vertical-align:middle;
 }
 
-/***** Table *****/
+/***** Table  End *****/
+
+/************ customized angular matiral Start *************/
+
+.md-select-menu-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    opacity: 0;
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+
+md-dialog md-dialog-content .md-dialog-content-body {
+    width: 100%;
+    margin-top: 20px;
+}
+
+md-dialog .md-dialog-content {
+    padding: 24px 24px 0px 24px;
+}
+
+p.ng-binding {
+    white-space: pre;
+}
+/************ customized angular matiral End *************/

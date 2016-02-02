@@ -3,8 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('family.shared.services', []).
 
-factory('utilService', ['$filter', '$location', 'myConstants',
-        function($filter, $location, myConstants) {
+factory('utilService', ['$filter', '$location', '$mdDialog', 'myConstants',
+        function($filter, $location, $mdDialog, myConstants) {
 
 	return {
 		/**
@@ -246,7 +246,38 @@ factory('utilService', ['$filter', '$location', 'myConstants',
 			}
 
 			return result;
+		},
+		financeTypes: function() {
+			var types = [];
+			types.push({title: '支出', value: 'expense'});
+			types.push({title: '收入', value: 'income'});
+			types.push({title: '预支付', value: 'advance'});
+			types.push({title: '预计', value: 'predict'});
+			return types;
+		},
+		alert: function(event, message) {
+			$mdDialog.show(
+				$mdDialog.alert()
+					.parent(angular.element(document.querySelector('#pop-modal')))
+					.clickOutsideToClose(true)
+					.title('提示信息')
+					.textContent(message)
+					.ariaLabel('Alert Dialog')
+					.ok('Got it!')
+					.targetEvent(event)
+			);
+		},
+		confirm: function(event, message, callback) {
+			var confirm = $mdDialog.confirm()
+				.title('确认信息')
+				.content(message)
+				.ariaLabel('Confirm Dialog')
+				.targetEvent(event)
+				.ok('OK')
+				.cancel('Cancel');
+			$mdDialog.show(confirm).then(callback);
 		}
+
 	}
 }]).
 
@@ -413,7 +444,7 @@ factory('httpCallback', ['$location', '$routeParams', 'clientLoginService', 'uti
 						location.href = 'login.html';
 					}
 				} else if (data.error == customizedError.userNoPermission) {
-					alert('您没有权限执行该操作');
+					utilService.alert(null, "您没有权限执行该操作");
 				}
 			}
 		}, 
@@ -430,10 +461,10 @@ factory('httpCallback', ['$location', '$routeParams', 'clientLoginService', 'uti
                 status == httpStatusCode.failedDependency ||
                 status == httpStatusCode.gatewayTimeout ||
                 status == httpStatusCode.unprocessableEntity) {
-				alert(httpStatusFactory.getStatusName(status));
+				utilService.alert(null, httpStatusFactory.getStatusName(status));
             } else {
 				// Once error occurs, add it to the system level errors for display.
-				alert(httpStatusFactory.getStatusName(status));
+				utilService.alert(null, httpStatusFactory.getStatusName(status));
 			}
 		}
 	};

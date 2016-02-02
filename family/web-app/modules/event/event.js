@@ -45,7 +45,7 @@ controller('QueryEventController', ['$scope', '$filter', 'myConstants', 'dateCon
             memo = event.memo;
         }
         var message = "事件详细信息:\n\n标题: " + title + "\n\n日期: " + date + "\n\n备注: " + memo;
-        alert(message);
+        utilService.alert(null, message);
     };
 
     $scope.query = function() {
@@ -54,21 +54,19 @@ controller('QueryEventController', ['$scope', '$filter', 'myConstants', 'dateCon
         });
     };
 
-    $scope.delete = function(event) {
-        var result = confirm("你确定要删除事件: '" + event.title + "' 吗?");
-
-        if (true == result) {
+    $scope.delete = function(ev, event) {
+        utilService.confirm(ev, "你确定要删除事件: '" + event.title + "' 吗?", function(){
             eventService.delete(event, function(rst){
                 var index = $scope.events.indexOf(event);
                 $scope.events.splice(index, 1);
-                alert("删除成功");
+                utilService.alert(null, "删除成功");
             });
-        }
+        });
     };
 }]).
 
-controller('CreateEventController', ['$scope', '$filter', 'myConstants', 'dateConfig', 'eventService',
-    function($scope, $filter, myConstants, dateConfig, eventService) {
+controller('CreateEventController', ['$scope', '$filter', 'myConstants', 'dateConfig', 'eventService', 'utilService',
+    function($scope, $filter, myConstants, dateConfig, eventService, utilService) {
 
     $scope.dateConfig = dateConfig;
 
@@ -87,7 +85,7 @@ controller('CreateEventController', ['$scope', '$filter', 'myConstants', 'dateCo
     $scope.create = function() {
         if (!$scope.form.$invalid) {
             eventService.create($scope.data, function(result){
-                alert("事件添加成功");
+                utilService.alert(null, "事件添加成功");
                 init();
             });
         };

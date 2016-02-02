@@ -70,7 +70,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target/work/tomcat" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="library" name="org.grails.ide.eclipse.core.CLASSPATH_CONTAINER" level="application" />
     <orderEntry type="library" name="grails-2.4.4" level="application" />
     <orderEntry type="module-library" exported="">
