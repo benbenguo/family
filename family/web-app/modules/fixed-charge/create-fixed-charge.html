@@ -12,24 +12,35 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="支出标题 *" required />
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
-                                    <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
-                                </div>
-                            </div>
-                            <div class="input-number">
-                                <input type="number" name="amount" ng-model="data.amount" class="form-control" placeholder="支出金额 *"  required />
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
-                                    <span ng-if="form.amount.$error.required" ng-bind="error.amount.required"></span>
-                                </div>
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
-                                    <span ng-if="form.amount.$error.number" ng-bind="error.amount.number"></span>
-                                </div>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>支出标题</label>
+                                    <input type="text" name="title" ng-model="data.title" required />
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
+                                        <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
+                                    </div>
+                                </md-input-container>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea class="form-control" ng-model="data.memo" type="text" placeholder="支出备注 * (可选)"/>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>金额</label>
+                                    <input type="number" name="amount" ng-model="data.amount" step="0.01" required />
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                        <span ng-if="form.amount.$error.required" ng-bind="error.amount.required"></span>
+                                    </div>
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                        <span ng-if="form.amount.$error.number" ng-bind="error.amount.number"></span>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>备注（可选）</label>
+                                    <input type="text" name="memo" ng-model="data.memo"/>
+                                </md-input-container>
                             </div>
                         </div>
                         <div class="clearfix"></div>

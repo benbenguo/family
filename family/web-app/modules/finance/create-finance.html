@@ -12,42 +12,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <select name="type" ng-model="data.type">
-                                    <option value="expense">支出</option>
-                                    <option value="income">收入</option>
-                                    <option value="advance">预支付</option>
-                                    <option value="predict">预计</option>
-                                </select>
+                                <md-input-container class="md-block">
+                                    <label>类型</label>
+                                    <md-select ng-model="data.type">
+                                        <md-option ng-repeat="type in types" value="{{type.value}}">{{type.title}} </md-option>
+                                    </md-select>
+                                </md-input-container>
                             </div>
-                            <div class="form-group">
-                                <select name="category" ng-model="data.category" ng-options="c.title for c in categories" required>
-                                    <option value="">-- 类别 --</option>
-                                </select>
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.category.$touched">
-                                    <span ng-if="data.category==null" ng-bind="error.category"></span>
-                                </div>
+                            <div class="form-group" style="margin-top: 42px;">
+                                <md-input-container class="md-block" >
+                                    <label>类别</label>
+                                    <md-select name="category" ng-model="data.category" required>
+                                        <md-option ng-repeat="c in categories" value="{{c.id}}">{{c.title}} </md-option>
+                                    </md-select>
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.category.$touched">
+                                        <span ng-if="data.category==null" ng-bind="error.category"></span>
+                                    </div>
+                                </md-input-container>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" name="title" ng-model="data.title" class="form-control" placeholder="标题 *" required />
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
-                                    <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
-                                </div>
-                            </div>
-                            <div class="input-number">
-                                <input type="number" name="amount" ng-model="data.amount" class="form-control" placeholder="金额 *"  required />
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
-                                    <span ng-if="form.amount.$error.required" ng-bind="error.amount.required"></span>
-                                </div>
-                                <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
-                                    <span ng-if="form.amount.$error.number" ng-bind="error.amount.number"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="form-group" style="margin-top: 42px;">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>日期</label>
                                     <mb-datepicker element-id='recordDate'
                                                    arrows="dateConfig.arrows"
                                                    input-class="date-input"
@@ -55,26 +40,63 @@
                                                    calendar-header="dateConfig.header"
                                                    date="data.date"
                                                    date-format="YYYY-MM-DD"></mb-datepicker>
-                                    <!--<div class="form-group">-->
-                                        <!--<input type="text"-->
-                                               <!--class="form-control input-datepicker"-->
-                                               <!--placeholder="记账日期 ..."-->
-                                               <!--datepicker-popup="yyyy-MM-dd"-->
-                                               <!--ng-model="data.date"-->
-                                               <!--is-open="opened"-->
-                                               <!--datepicker-options="dateOptions"-->
-                                               <!--ng-click="open($event)"-->
-                                               <!--close-text="Close"-->
-                                               <!--required readonly="readonly"/>-->
-                                    <!--</div>-->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="memo" ng-model="data.memo" class="form-control" placeholder="备注 *（可选）" />
-                                    </div>
-                                </div>
+                                </md-input-container>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>标题</label>
+                                    <input type="text" name="title" ng-model="data.title" required />
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.title.$touched">
+                                        <span ng-if="form.title.$error.required" ng-bind="error.title"></span>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div class="form-group">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>金额</label>
+                                    <input type="number" name="amount" ng-model="data.amount" step="0.01" required />
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                        <span ng-if="form.amount.$error.required" ng-bind="error.amount.required"></span>
+                                    </div>
+                                    <div class="error-text text-danger" ng-if="form.$submitted || form.amount.$touched">
+                                        <span ng-if="form.amount.$error.number" ng-bind="error.amount.number"></span>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div class="form-group">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>备注（可选）</label>
+                                    <input type="text" name="memo" ng-model="data.memo"/>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-12">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-6">-->
+                                    <!--<div class="form-group">-->
+                                        <!--<md-input-container class="md-block" flex-gt-sm>-->
+                                            <!--<mb-datepicker element-id='recordDate'-->
+                                                   <!--arrows="dateConfig.arrows"-->
+                                                   <!--input-class="date-input"-->
+                                                   <!--input-name="recordDate"-->
+                                                   <!--calendar-header="dateConfig.header"-->
+                                                   <!--date="data.date"-->
+                                                   <!--date-format="YYYY-MM-DD"></mb-datepicker>-->
+                                        <!--</md-input-container>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-6">-->
+                                    <!--<div class="form-group">-->
+                                        <!--<md-input-container class="md-block" flex-gt-sm>-->
+                                            <!--<label>备注（可选）</label>-->
+                                            <!--<input type="text" name="memo" ng-model="data.memo"/>-->
+                                        <!--</md-input-container>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="clearfix"></div>
                         <div class="col-md-12">
                             <div class="form-group text-center">

@@ -9,32 +9,32 @@ class FixedChargeController extends BaseController {
         delete: "POST"
     ]
 
+    def fixedChargeService
+    def installmentService
+
     def create() {
         def data = request.JSON
         def title = data.title
         def memo = data.memo
         def amount = data.amount
 
-        def event = new FixedCharge(title: title, memo: memo, amount: amount, createdBy: userInfo.proxyUser, lastUpdatedBy: userInfo.proxyUser, dateCreated: new Date(), lastUpdated: new Date())
-        event.save(flush: true, failOnError: true)
+        def fixedCharge = new FixedCharge(title: title, memo: memo, amount: amount, createdBy: userInfo.proxyUser, lastUpdatedBy: userInfo.proxyUser, dateCreated: new Date(), lastUpdated: new Date())
+        fixedCharge.save(flush: true, failOnError: true)
 
         render([success: true] as JSON)
     }
 
     def query() {
-        def list = FixedCharge.list(sort: "dateCreated", order: "desc").collect {[
-                id: it.id,
-                title: it.title,
-                amount: it.amount,
-                memo: it.memo
-        ]}
+        def charges = fixedChargeService.query()
+        def installments = installmentService.queryForFixedCharge()
+        charges.addAll(installments)
 
         def sum = 0f
-        if (list != null && list.size() != 0) {
-            sum = list.amount.sum()
+        if (charges != null && charges.size() != 0) {
+            sum = charges.amount.sum()
         }
 
-        render([success: true, data: list, sum: sum] as JSON)
+        render([success: true, data: charges, sum: sum] as JSON)
     }
 
     def delete() {

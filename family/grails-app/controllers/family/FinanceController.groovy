@@ -12,6 +12,8 @@ class FinanceController extends BaseController {
     ]
 
     def financeService
+    def fixedChargeService
+    def installmentService
 
     def create() {
         def data = request.JSON
@@ -35,8 +37,31 @@ class FinanceController extends BaseController {
         def month = params.month
         def type = params.type
 
-        def list = financeService.query(month, type, userInfo)
+        def list = []
+        def charges = []
+
+        if (userInfo.proxyUser.username == "family") {
+            charges = fixedChargeService.queryForFinance(month)
+            charges.addAll(installmentService.queryForFinance(month))
+        }
+
+        if (type == FinanceTypeConstants.ADVANCE) {
+            list.addAll(charges)
+            list.addAll(financeService.query(month, type, userInfo))
+        } else {
+            list.addAll(financeService.query(month, type, userInfo))
+        }
+
         def sum = financeService.sumByMonth(month, userInfo)
+        for (int i = 0; i < sum.size(); i++) {
+            def sumType = sum[i].type;
+            if (sumType == FinanceTypeConstants.ADVANCE) {
+                if (charges.size() != 0) {
+                    sum[i].amount += charges.amount.sum()
+                }
+                break
+            }
+        }
 
         render([success: true, data: list, sum: sum] as JSON)
     }

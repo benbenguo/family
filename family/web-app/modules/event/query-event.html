@@ -10,26 +10,40 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
-                        <mb-datepicker element-id='start'
-                                       arrows="dateConfig.arrows"
-                                       input-class="date-input"
-                                       input-name="start"
-                                       calendar-header="dateConfig.header"
-                                       date="data.start"
-                                       date-format="YYYY-MM-DD"></mb-datepicker>
-                        <mb-datepicker element-id='end'
-                                       arrows="dateConfig.arrows"
-                                       calendar-header="dateConfig.header"
-                                       input-class="date-input"
-                                       input-name="end"
-                                       date="data.end"
-                                       date-format="YYYY-MM-DD"></mb-datepicker>
+                        <div class="form-group">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>开始日期</label>
+                                <mb-datepicker element-id='start'
+                                               arrows="dateConfig.arrows"
+                                               input-class="date-input"
+                                               input-name="start"
+                                               calendar-header="dateConfig.header"
+                                               date="data.start"
+                                               date-format="YYYY-MM-DD"></mb-datepicker>
+                            </md-input-container>
+                        </div>
+                        <div class="form-group"">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>结束日期</label>
+                                <mb-datepicker element-id='end'
+                                               arrows="dateConfig.arrows"
+                                               calendar-header="dateConfig.header"
+                                               input-class="date-input"
+                                               input-name="end"
+                                               date="data.end"
+                                               date-format="YYYY-MM-DD"></mb-datepicker>
+                            </md-input-container>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" ng-model="data.title" placeholder="足迹标题 *">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>足迹标题</label>
+                                <input type="text" ng-model="data.title">
+                            </md-input-container>
+
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top: -18px;">
                             <button type="submit" class="btn btn-primary" ng-click="query()"> 查询足迹 </button>
                             &nbsp;
                             <a type="button" class="btn btn-info" href="#create-event"> 记录足迹 </a>

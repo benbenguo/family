@@ -73,13 +73,13 @@ controller('QueryFinanceController', ['$scope', '$filter', '$mdDialog', 'myConst
                 $scope.cash.advance = 0;
 
                 for (var i = 0; i < sum.length; i++) {
-                    var type = sum[i][0];
-                    if (type == 'expense') {
-                        $scope.cash.expense = sum[i][1];
-                    } else if (type == 'income'){
-                        $scope.cash.income = sum[i][1];
+                    var item = sum[i];
+                    if (item.type == 'expense') {
+                        $scope.cash.expense = item.amount;
+                    } else if (item.type == 'income') {
+                        $scope.cash.income = item.amount;
                     } else {
-                        $scope.cash.advance = sum[i][1];
+                        $scope.cash.advance = item.amount;
                     }
                 };
             });
@@ -107,8 +107,8 @@ controller('QueryFinanceController', ['$scope', '$filter', '$mdDialog', 'myConst
         $scope.detail = function(finance) {
             var title = finance.title;
             var amount = $filter('number')(finance.amount, 2);
-            var type = $filter('getFinanceCategoryType')(finance.category.type);
-            var category = finance.category.title;
+            var type = $filter('getFinanceCategoryType')(finance.type);
+            var category = finance.category;
             var date = $filter('date')(finance.date, myConstants.shortDateFormat)
             var memo = '';
 
@@ -136,6 +136,8 @@ controller('StatisticsFinanceController', ['$scope', '$filter', 'myConstants', '
         income: 0,
         advance: 0
     };
+
+    $scope.types = utilService.financeTypes();
 
     $scope.getBalance = function() {
         return $scope.cash.income - $scope.cash.expense;
@@ -230,6 +232,8 @@ controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'util
             };
         };
 
+        $scope.types = utilService.financeTypes();
+
         $scope.dateConfig = dateConfig;
 
         $scope.categories = [];
@@ -266,7 +270,8 @@ controller('CreateFinanceController', ['$scope', '$filter', 'myConstants', 'util
         $scope.create = function() {
             if (!$scope.form.$invalid) {
                 financeService.create($scope.data, function() {
-                    utilService.alert(null, "成功的添加了一笔");
+                    //utilService.alert(null, "成功的添加了一笔");
+                    alert("成功的添加了一笔");
                     init();
                 });
             }

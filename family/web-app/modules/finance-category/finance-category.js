@@ -27,6 +27,8 @@ controller('CreateFinanceCategoryController', ['$scope', 'myConstants', 'finance
 
     $scope.categories = [];
 
+    $scope.types = utilService.financeTypes();
+
     /*** Watch the data.type change and get the related categories Start ***/
     $scope.$watch(function() {
             return $scope.data.type;
@@ -44,7 +46,8 @@ controller('CreateFinanceCategoryController', ['$scope', 'myConstants', 'finance
     $scope.create = function() {
         if (!$scope.form.$invalid) {
             financeCategoryService.create($scope.data, function(result) {
-                utilService.alert(null, "类别添加成功");
+                //utilService.alert(null, "类别添加成功");
+                alert("类别添加成功");
                 $scope.categories.push(result.category);
                 $scope.data.title = '';
             });

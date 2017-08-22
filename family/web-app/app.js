@@ -35,12 +35,23 @@ controller('MainController', ['$scope', '$location', 'clientLoginService', 'http
     $scope.isAuthorized = clientLoginService.isAuthorized;
     $scope.getCurrentUserInfo = clientLoginService.getCurrentUserInfo;
     $scope.hasPendingRequests = httpRequestTracker.hasPendingRequests;
+    $scope.isShow = false;
+
+    $scope.showFeature = function() {
+        return $scope.isShow;
+    }
 
     if (!$scope.isAuthorized()) {
         location.href = 'login.html';
     };
 
+    $scope.load = function(path) {
+        $scope.isShow = true;
+        $location.url(path);
+    };
+
     $scope.closeModal = function() {
+        $scope.isShow = false;
         $location.url('/');
     };
 

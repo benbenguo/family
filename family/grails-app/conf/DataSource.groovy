@@ -42,7 +42,7 @@ environments {
             logSql = false
             pooled = true
 
-            url = "jdbc:mysql://127.0.0.1:3306/family?autoreconnect=true&useUnicode=true&characterEncoding=UTF-8"
+            url = "jdbc:mysql://127.0.0.1:3306/family?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8"
             username = "dev-user"
             password = "dev-user"
 

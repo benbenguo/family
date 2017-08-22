@@ -11,27 +11,28 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text"
-                                   class="form-control input-datepicker"
-                                   placeholder="记账日期 ..."
-                                   datepicker-popup="yyyy-MM"
-                                   ng-model="data.month"
-                                   is-open="opened"
-                                   datepicker-options="dateOptions"
-                                   ng-click="open($event)"
-                                   close-text="Close"
-                                   required readonly="readonly"/>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <input type="text"
+                                       class="input-datepicker"
+                                       datepicker-popup="yyyy-MM"
+                                       ng-model="data.month"
+                                       is-open="opened"
+                                       datepicker-options="dateOptions"
+                                       ng-click="open($event)"
+                                       close-text="Close"
+                                       required readonly="readonly"/>
+                            </md-input-container>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <!--<md-select ng-model="data.type">-->
-                                <!--<md-option ng-repeat="type in types" value="{{type.value}}">{{type.title}} </md-option>-->
-                            <!--</md-select>-->
+                            <md-select ng-model="data.type">
+                                <md-option ng-repeat="type in types" value="{{type.value}}">{{type.title}} </md-option>
+                            </md-select>
 
-                            <select name="type" ng-model="data.type" placeholder="类型 ...">
-                                <option ng-repeat="type in types" value="{{type.value}}">{{type.title}}</option>
-                            </select>
+                            <!--<select name="type" ng-model="data.type" placeholder="类型 ...">-->
+                                <!--<option ng-repeat="type in types" value="{{type.value}}">{{type.title}}</option>-->
+                            <!--</select>-->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -90,7 +91,7 @@
                                     <span ng-bind="(finance.date | date:'yyyy-MM-dd')"></span>
                                 </td>
                                 <td style="text-align: center;">
-                                    <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="delete(finance, $event)"> 删 除 </button>
+                                    <button ng-if="finance.canDelete" type="button" class="btn btn-info btn-flat btn-xs" ng-click="delete(finance, $event)"> 删 除 </button>
                                 </td>
                             </tr>
                         </tbody>

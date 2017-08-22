@@ -85,7 +85,8 @@ controller('CreateEventController', ['$scope', '$filter', 'myConstants', 'dateCo
     $scope.create = function() {
         if (!$scope.form.$invalid) {
             eventService.create($scope.data, function(result){
-                utilService.alert(null, "事件添加成功");
+                //utilService.alert(null, "事件添加成功");
+                alert("事件添加成功");
                 init();
             });
         };

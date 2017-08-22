@@ -11,26 +11,24 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text"
-                                   class="form-control input-datepicker"
-                                   placeholder="记账日期 ..."
-                                   datepicker-popup="yyyy-MM"
-                                   ng-model="data.month"
-                                   is-open="opened"
-                                   datepicker-options="dateOptions"
-                                   ng-click="open($event)"
-                                   close-text="Close"
-                                   required readonly="readonly"/>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <input type="text"
+                                       class="input-datepicker"
+                                       datepicker-popup="yyyy-MM"
+                                       ng-model="data.month"
+                                       is-open="opened"
+                                       datepicker-options="dateOptions"
+                                       ng-click="open($event)"
+                                       close-text="Close"
+                                       required readonly="readonly"/>
+                            </md-input-container>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="type" ng-model="data.type" placeholder="类型 ...">
-                                <option value="expense">支出</option>
-                                <option value="income">收入</option>
-                                <option value="advance">预支付</option>
-                                <option value="predict">预计</option>
-                            </select>
+                            <md-select ng-model="data.type">
+                                <md-option ng-repeat="type in types" value="{{type.value}}">{{type.title}} </md-option>
+                            </md-select>
                         </div>
                     </div>
                     <div class="col-md-6">

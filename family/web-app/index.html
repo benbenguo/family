@@ -25,167 +25,165 @@
     </head>
 
     <body ng-controller="MainController">
-        <div class="cover">
-        <!-- Start Logo Section -->
-        <section id="logo-section" class="text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="logo text-center">
-                            <h1><label ng-bind="getCurrentUserInfo().user.name"></label>    </h1>
-                            <span>We Are Famlily</span>
+        <div class="cover" ng-show="!showFeature()">
+            <!-- Start Logo Section -->
+            <section id="logo-section" class="text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="logo text-center">
+                                <h1><label ng-bind="getCurrentUserInfo().user.name"></label>    </h1>
+                                <span>We Are Famlily</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- End Logo Section -->
+            </section>
+            <!-- End Logo Section -->
 
 
-        <!-- Start Main Body Section -->
-        <div class="mainbody-section text-center">
-            <div class="container">
-                <div class="row">
+            <!-- Start Main Body Section -->
+            <div class="mainbody-section text-center">
+                <div class="container">
+                    <div class="row">
 
-                    <div class="col-md-3">
+                        <div class="col-md-3">
 
-                        <div class="menu-item blue">
-                            <a href="#query-event" data-toggle="modal" data-target="#pop-modal">
-                                <i class="fa fa-magic"></i>
-                                <p>生活足迹</p>
-                            </a>
-                        </div>
-
-                        <div class="menu-item green">
-                            <a href="#query-finance" data-toggle="modal" data-target="#pop-modal">
-                                <i class="fa fa-area-chart"></i>
-                                <p>财政收支</p>
-                            </a>
-                        </div>
-
-                        <div class="menu-item light-red">
-                            <a href="#query-fixed-charge" data-toggle="modal" data-target="#pop-modal">
-                                <i class="fa fa-money"></i>
-                                <p>每月固定支出</p>
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6">
-
-                        <!-- Start Carousel Section -->
-                        <div class="home-slider">
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-bottom: 30px;">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                                </ol>
-
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img src="images/lifei-03.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="item">
-                                        <img src="images/lifei-02.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="item">
-                                        <img src="images/lifei-01.jpg" class="img-responsive" alt="">
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Start Carousel Section -->
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="menu-item color responsive">
-                                    <a href="#service-modal" data-toggle="modal" data-target="#pop-modal">
-                                        <i class="fa fa-area-chart"></i>
-                                        <p>To be continued</p>
-                                    </a>
-                                </div>
+                            <div class="menu-item blue">
+                                <a href="" ng-click="load('query-event')">
+                                    <i class="fa fa-magic"></i>
+                                    <p>生活足迹</p>
+                                </a>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="menu-item light-orange responsive-2">
-                                    <a href="#team-modal" data-toggle="modal" data-target="#pop-modal">
-                                        <i class="fa fa-users"></i>
-                                        <p>To be continued</p>
-                                    </a>
-                                </div>
+                            <div class="menu-item green">
+                                <a href="" ng-click="load('query-finance')">
+                                    <i class="fa fa-area-chart"></i>
+                                    <p>财政收支</p>
+                                </a>
+                            </div>
+
+                            <div class="menu-item light-red">
+                                <a href="" ng-click="load('query-fixed-charge')">
+                                    <i class="fa fa-money"></i>
+                                    <p>每月固定支出</p>
+                                </a>
                             </div>
 
                         </div>
 
-                    </div>
+                        <div class="col-md-6">
 
-                    <div class="col-md-3">
+                            <!-- Start Carousel Section -->
+                            <div class="home-slider">
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-bottom: 30px;">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    </ol>
 
-                        <div class="menu-item light-red">
-                            <a href="#contact-modal" data-toggle="modal" data-target="#pop-modal">
-                                <i class="fa fa-envelope-o"></i>
-                                <p>To be continued</p>
-                            </a>
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <img src="images/lifei-03.jpg" class="img-responsive" alt="">
+                                        </div>
+                                        <div class="item">
+                                            <img src="images/lifei-02.jpg" class="img-responsive" alt="">
+                                        </div>
+                                        <div class="item">
+                                            <img src="images/lifei-01.jpg" class="img-responsive" alt="">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Start Carousel Section -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="menu-item color responsive">
+                                        <a href="" ng-click="load('service-modal')">
+                                            <i class="fa fa-area-chart"></i>
+                                            <p>To be continued</p>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="menu-item light-orange responsive-2">
+                                        <a href="" ng-click="load('team-modal')">
+                                            <i class="fa fa-users"></i>
+                                            <p>To be continued</p>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="menu-item color">
-                            <a href="#testimonial-modal" data-toggle="modal" data-target="#pop-modal">
-                                <i class="fa fa-comment-o"></i>
-                                <p>To be continued</p>
-                            </a>
-                        </div>
+                        <div class="col-md-3">
 
-                        <div class="menu-item blue">
-                            <a href="#news-modal" data-toggle="modal" data-target="#pop-modal">
-                                <i class="fa fa-mortar-board"></i>
-                                <p>To be continued</p>
-                            </a>
-                        </div>
+                            <div class="menu-item light-red">
+                                <a href="" ng-click="load('contact-modal')">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <p>To be continued</p>
+                                </a>
+                            </div>
 
+                            <div class="menu-item color">
+                                <a href="" ng-click="load('testimonial-modal')">
+                                    <i class="fa fa-comment-o"></i>
+                                    <p>To be continued</p>
+                                </a>
+                            </div>
+
+                            <div class="menu-item blue">
+                                <a href="" ng-click="load('news-modal')">
+                                    <i class="fa fa-mortar-board"></i>
+                                    <p>To be continued</p>
+                                </a>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End Main Body Section -->
-        
-        <!-- Start Copyright Section -->
-        <div class="copyright text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="text-align: center">Do you want to leave? Click here --> <a ng-click="logout()" style="cursor: pointer;">Logout</a></div>
+            <!-- End Main Body Section -->
+
+            <!-- Start Copyright Section -->
+            <div class="copyright text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="text-align: center">Do you want to leave? Click here --> <a ng-click="logout()" style="cursor: pointer;">Logout</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End Copyright Section -->
-
+            <!-- End Copyright Section -->
         </div>
 
         <!-- Start Feature Section -->
-        <div class="section-modal modal fade" id="pop-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="section-modal" ng-show="showFeature()">
             <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal" ng-click="closeModal()">
+                <div class="row close-modal" ng-click="closeModal()">
                     <div class="lr">
                         <div class="rl">
                         </div>
                     </div>
                 </div>
                 
-                <div class="container" ng-view>
-
-                </div>
+                <div class="container" ng-view></div>
                 
             </div>
         </div>
         <!-- End Feature Section -->
 
+        <!-- Mask Section -->
         <div>
             <div class="mask-container" ng-show="hasPendingRequests()">
                 <div class="mask-indicator">
@@ -201,7 +199,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- Mask Section -->
 
         <!-- Template js -->
         <script src="components/jquery-2.1.1.min.js"></script>

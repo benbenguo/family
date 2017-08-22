@@ -16,4 +16,21 @@ class SharedUtils {
             return false
         }
     }
+
+    /**
+     * Converts the parameterMap on controller request to Map.
+     * @param requestParameterMap: The instance of request.parameterMap from controller.
+     * @return: The map instance.
+     */
+    static convertRequestParameterToMap(requestParameterMap) {
+        def map = [:]
+
+        requestParameterMap.each {
+            // Checks if this parameter is a list. If NOT then the first value will be taken.
+            // Otherwise the entire list will be taken.
+            map.put(it.key, it.value.size() == 1 ? it.value.first() : it.value)
+        }
+
+        return map
+    }
 }

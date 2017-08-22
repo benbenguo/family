@@ -889,10 +889,10 @@ and (max-width : 991px) {
     margin-bottom: 25px;
 }
 
-.contact .form-group input,
-.contact .form-group textarea {
-    padding: 20px;
-}
+/*.contact .form-group input,*/
+/*.contact .form-group textarea {*/
+    /*padding: 20px;*/
+/*}*/
 
 .contact .form-group input.form-control {
     height: auto;
@@ -972,59 +972,92 @@ and (max-width : 991px) {
 
 /***** Customized CSS ****************/
 
+.close-modal {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 75px;
+    height: 75px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.close-modal .lr {
+    z-index: 1051;
+    width: 1px;
+    height: 75px;
+    margin-left: 35px;
+    background-color: #444;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.close-modal .lr .rl {
+    z-index: 1052;
+    width: 1px;
+    height: 75px;
+    background-color: #222;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
 .error-text {
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     line-height: 21px;
 }
 
-.form-group input {
-    padding: 30px 30px 30px 20px;
-}
+/*.form-group input {*/
+    /*padding: 30px 30px 30px 20px;*/
+/*}*/
 
 .form-group textarea {
     height: 137px;
     padding: 20px 30px 0px 20px;
 }
 
-.form-group select {
-    padding: 20px;
-    width: 100%;
-    display: block;
-    font-size: 14px;
-    line-height: 56px;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
+/*.form-group select {*/
+    /*padding: 20px;*/
+    /*width: 100%;*/
+    /*display: block;*/
+    /*font-size: 14px;*/
+    /*line-height: 56px;*/
+    /*color: #555;*/
+    /*background-color: #fff;*/
+    /*background-image: none;*/
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 4px;*/
+    /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
+    /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
+    /*-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;*/
+    /*-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
+    /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
+/*}*/
 
-.form-group .datepicker-input{
-    padding: 20px;
-    width: 100%;
-    display: block;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
+/*.form-group .datepicker-input{*/
+    /*padding: 20px;*/
+    /*width: 100%;*/
+    /*display: block;*/
+    /*font-size: 14px;*/
+    /*line-height: 1.42857143;*/
+    /*color: #555;*/
+    /*background-color: #fff;*/
+    /*background-image: none;*/
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 4px;*/
+    /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
+    /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
+    /*-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;*/
+    /*-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
+    /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
+/*}*/
 
-.form-group .btn {
-    padding: 20px;
+.btn {
+    padding: 8px 20px 8px 20px;
+    border-radius: 0px;
+    margin-top: 12px;
 }
 
 div.mask-container {

@@ -75,7 +75,8 @@ controller('CreateFixedChargeController', ['$scope', '$filter', 'myConstants', '
     $scope.create = function() {
         if (!$scope.form.$invalid) {
             fixedChargeService.create($scope.data, function(result){
-                utilService.alert(null, "成功的添加了一笔每月固定支出");
+                //utilService.alert(null, "成功的添加了一笔每月固定支出");
+                alert("成功的添加了一笔每月固定支出");
                 init();
             });
         };
